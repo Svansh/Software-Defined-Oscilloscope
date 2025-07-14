@@ -1,0 +1,4 @@
+UART_Driver.c:10:6:UART_init	8	static
+UART_Driver.c:17:13:UART_Clock_init	4	static
+UART_Driver.c:24:6:Transmit_ADC_Values	24	static
+UART_Driver.c:35:6:Transmit_Single_ADC_Value	16	static

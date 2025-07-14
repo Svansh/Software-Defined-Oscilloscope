@@ -1,0 +1,4 @@
+main.c:17:6:send_ack	4	static
+main.c:23:6:send_nack	4	static
+main.c:29:5:main	8	static
+main.c:43:6:USART1_IRQHandler	16	static

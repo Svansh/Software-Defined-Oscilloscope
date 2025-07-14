@@ -1,0 +1,3 @@
+frame.c:12:9:calc_checksum	24	static
+frame.c:26:6:Start_DMA_Transmission	16	static
+frame.c:35:6:Transmit_Frame	24	static
