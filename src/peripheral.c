@@ -76,17 +76,16 @@ static void ADC_init(){
 	RCC->APB2ENR |= RCC_APB2ENR_ADC1EN | RCC_APB2ENR_IOPAEN | RCC_APB2ENR_AFIOEN;
 	GPIOA->CRL &= ~(GPIO_CRL_CNF0 | GPIO_CRL_MODE0); // Analog Input Mode
 
-	ADC1->CR1 |= ADC_CR1_SCAN;
-	ADC1->CR2 |= ADC_CR2_CONT | ADC_CR2_DMA;
+	ADC1->CR1 |= ADC_CR1_SCAN | ADC_CR1_EOCIE;
+	ADC1->CR2 |= ADC_CR2_CONT;
 	ADC1->SMPR2 |= ADC_SMPR2_SMP0; // 239.5 cycles between each conversion
 
-//	NVIC_EnableIRQ(ADC1_2_IRQn);
 }
 
-/*void ADC1_2_IRQHandler(void){
-	if(ADC1->SR & ADC_SR_EOC)
-	print_debug("Value of ADC->SR: 0x%08\n\r", ADC1->SR);
-}*/
+void ADC1_2_IRQHandler(void){
+	print_debug("Inside ADC1 ISR!!!\n\r");
+}
+
 
 void ADC_Start(uint8_t* keepSamplingPtr){
 	if(*keepSamplingPtr == 0){

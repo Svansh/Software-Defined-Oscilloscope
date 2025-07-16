@@ -25,23 +25,23 @@ void captureSignals_loop(){
 
 	asm volatile(
 
-			"ldrh r9, [%[sIndex]]  \n\t" // loading sIndex into R9
+			"			ldrh r9, [%[sIndex]]  					\n\t" // loading sIndex into R9
 
 			"sample_loop:"
 			"			ldrb r0, [%[keepSampling]]              \n\t"
 			"			cbz r0, finished                        \n\t"
 			"			ldr r1,=0x40012400                      \n\t"
-
+			""
 			"wait_adc:"
 			"			push {r0-r3, r9, lr}					\n\t"
 			"			mov r0, %[debug_msg]					\n\t"
 			"			blx %[debug_func]						\n\t"
 			"			pop {r0-r3, r9, lr}						\n\t"
-			"			ldr r0, [r1, #0]						\n\t" // Loading ADC1 SR Register address
+			"			ldr r0, [r1, #0]						\n\t"
 			"			lsls r0, r0, #30						\n\t"
-			"			bpl wait_adc							\n\t"
+			"			bpl	wait_adc							\n\t"
 
-			"			ldr r0, [r1, #0x4C]						\n\t" // Loading ADC1 DR Register address
+			"			ldr r0, [r1, #0x4C]						\n\t" // Loading ADC1 DR Register
 			"			strh r0, [%[ch1], r9, lsl #1]			\n\t"
 			"			adds r9, r9, #1							\n\t"
 			"			cmp r9, %[nSamp]						\n\t"
@@ -51,16 +51,16 @@ void captureSignals_loop(){
 
 
 			"not_overflowed:"
-			"				strh r9, [%[sIndex]]				\n\t"
-			"				ldrb r0, [%[triggered]]				\n\t"
-			"				cbz r0, not_triggered				\n\t"
-			"				mov r2, %[lCtr]						\n\t"
-			"				adds r2, #1							\n\t"
-			"				cmp r2, %[half_samples]				\n\t"
-			"				beq finished						\n\t"
+			"			strh r9, [%[sIndex]]					\n\t"
+			"			ldrb r0, [%[triggered]]					\n\t"
+			"			cbz r0, not_triggered					\n\t"
+			"			mov r2, %[lCtr]							\n\t"
+			"			adds r2, #1								\n\t"
+			"			cmp r2, %[half_samples]					\n\t"
+			"			beq finished							\n\t"
 			""
 			"not_triggered:"
-			"				b sample_loop						\n\t"
+			"			b sample_loop							\n\t"
 			"finished:"
 
 			:
