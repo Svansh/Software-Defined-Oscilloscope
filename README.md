@@ -1,89 +1,70 @@
-Software-Defined-Oscilloscope
+Software-Defined Oscilloscope
 
-A lightweight, open-source oscilloscope implementation using software-first architecture
+A lightweight oscilloscope implementation built on STM32F103C8T6 ("Blue Pill") microcontroller with Qt-based PC interface. This project demonstrates real-time signal capture using STM32 peripherals (ADC + DMA + USART) and visualization on a host PC.
 
-Overview
+✨ Features
 
-This project implements a software-defined oscilloscope that uses microcontroller(s) and host-side software to acquire analog waveforms—via ADC or capture peripheral—and stream them to a controlling computer for real-time visualization and analysis.
+Real-time signal capture using STM32 ADC
 
-Key Features:
+DMA for efficient data transfer to USART
 
-Microcontroller-based data acquisition (ADC, DMA, timers)
+PC interface built with Qt for visualization
 
-Streaming capture via USB or serial port to host
+Configurable parameters (sampling rate, buffer size, etc.)
 
-Cross-platform GUI (or CLI) for waveform display and analysis
+Lightweight tiny_printf implementation for debugging
 
-Modular and extensible design for adding features like triggering, FFT, or multi-channel support
+📂 Project Structure
+Software-Defined-Oscilloscope/
+├── .settings/                # IDE-specific configuration files
+├── Debug/                    # Build output (binaries, object files, etc.)
+├── Libraries/                # External libraries and drivers
+├── Qt/                       # Qt-based PC interface source code
+├── src/                      # Core STM32 firmware
+│   ├── capture.c / capture.h       # Signal capture (ADC + DMA handling)
+│   ├── frame.c / frame.h           # Frame formatting for communication
+│   ├── main.c / main.h             # Application entry point
+│   ├── parameters.h                # Global parameter definitions
+│   ├── peripheral.c / peripheral.h # Peripheral initialization (GPIO, USART, etc.)
+│   ├── stm32f10x_conf.h            # STM32 configuration header
+│   ├── stm32f10x_it.c / it.h       # Interrupt service routines
+│   ├── system_stm32f10x.c          # System clock configuration
+│   ├── startup_stm32f10x.ld        # Linker script
+│   ├── tiny_printf.c               # Minimal printf implementation
+│   └── ...
+└── README.md
 
-Motivation
+🛠️ Getting Started
+Requirements
 
-Traditional oscilloscopes are often large, expensive, and rely on embedded firmware + display interfaces. The software-defined approach allows you to:
+STM32F103C8T6 (Blue Pill)
 
-Use a low-cost microcontroller alongside your PC for visualization
+ST-Link / USB-TTL programmer
 
-Leverage powerful host-side software (Python, Qt, etc.) for features
+STM32CubeIDE or arm-none-eabi-gcc toolchain
 
-Rapidly prototype and extend the tool via software
+Qt 5.x/6.x for PC visualization
 
-Project Structure
-.
-├── firmware/           # Microcontroller firmware source
-│   ├── main.c
-│   ├── adc.c
-│   └── dma.c
-├── host/               # Host-side visualization (Python/Qt or CLI)
-│   ├── scope.py
-│   └── gui/
-├── docs/               # Documentation and schematics
-│   └── wiring.md
-├── examples/           # Sample capture / test workflows
-│   └── sine_test
-└── CMakeLists.txt      # Build configuration
+Build & Flash (STM32CubeIDE)
 
-Getting Started
-Prerequisites
+Import the project into STM32CubeIDE
 
-Microcontroller development board (e.g. STM32, ESP32)
+Build the firmware
 
-ARM GCC toolchain or platform SDK
+Flash to the STM32 board via ST-Link
 
-USB-Serial driver (e.g., ST-Link or CDC)
+Run (Qt PC Interface)
 
-On host: Python 3.x + dependencies (e.g., PyQt5, numpy, pyserial)
+Open Qt/ project in Qt Creator
 
-Flashing Firmware
-cd firmware
-make clean
-make all
-make flash
+Build and run the application
 
-Running the GUI
-cd host
-pip install -r requirements.txt
-python scope.py --port /dev/ttyUSB0 --baud 115200
+Connect the STM32 via USB/Serial
 
-Usage
+📊 Usage
 
-Connect probe to ADC input pins.
+Connect your signal to the ADC pin (PA0).
 
-Launch the host GUI.
+Launch the Qt GUI to visualize incoming waveform.
 
-Start acquisition—waveform should appear with real-time scrolling.
-
-Use GUI controls to set timebase, volt/div, and trigger levels.
-
-Roadmap & Features
-Feature	Status
-ADC sampling	✅ Completed
-DMA buffering	In progress
-Triggering (edge-level)	Planned
-FFT display	Future
-Multi-channel acquisition	Future
-Contribution
-
-Contributions are welcome! Please fork, make changes, and submit a pull request. For bugs and feature requests, please open an issue.
-
-License
-This project is released under the MIT License — feel free to use, modify, and share!
-
+Adjust parameters (sampling rate, buffer size) in parameters.h.
