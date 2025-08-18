@@ -85,14 +85,5 @@ Contribution
 Contributions are welcome! Please fork, make changes, and submit a pull request. For bugs and feature requests, please open an issue.
 
 License
-
 This project is released under the MIT License — feel free to use, modify, and share!
 
-Tips for Embedding in LaTeX
-\section*{Software-Defined-Oscilloscope}
-\begin{itemize}
-  \item Uses a microcontroller to sample analog data and stream it to a PC.
-  \item Modular architecture: `firmware/` for MCU, `host/` for visualization.
-  \item Easy to extend: add triggers, FFT, multi-channel sampling.
-  \item Licensed under MIT—open and hackable!
-\end{itemize}
