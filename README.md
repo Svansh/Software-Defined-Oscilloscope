@@ -1,70 +1,72 @@
-Software-Defined Oscilloscope
+# Software-Defined Oscilloscope
 
-A lightweight oscilloscope implementation built on STM32F103C8T6 ("Blue Pill") microcontroller with Qt-based PC interface. This project demonstrates real-time signal capture using STM32 peripherals (ADC + DMA + USART) and visualization on a host PC.
+A software-defined oscilloscope built on **STM32F103C8T6** with a **Qt-based PC interface**.  
+The project captures analog signals via STM32 peripherals, transfers sampled data over UART, and visualizes waveforms on a computer.
 
-✨ Features
+---
 
-Real-time signal capture using STM32 ADC
+## ✨ Features
+- Signal acquisition using **STM32 ADC**  
+- UART data transfer to PC  
+- **Qt application** for real-time waveform visualization  
+- Modular source code for easy extension  
+- Lightweight `tiny_printf` implementation  
 
-DMA for efficient data transfer to USART
+---
 
-PC interface built with Qt for visualization
-
-Configurable parameters (sampling rate, buffer size, etc.)
-
-Lightweight tiny_printf implementation for debugging
-
-📂 Project Structure
-Software-Defined-Oscilloscope/
+## 📂 Project Structure
+```text
+Software-Defined-Oscilloscope
+│
 ├── .settings/                # IDE-specific configuration files
 ├── Debug/                    # Build output (binaries, object files, etc.)
 ├── Libraries/                # External libraries and drivers
 ├── Qt/                       # Qt-based PC interface source code
 ├── src/                      # Core STM32 firmware
-│   ├── capture.c / capture.h       # Signal capture (ADC + DMA handling)
-│   ├── frame.c / frame.h           # Frame formatting for communication
-│   ├── main.c / main.h             # Application entry point
-│   ├── parameters.h                # Global parameter definitions
-│   ├── peripheral.c / peripheral.h # Peripheral initialization (GPIO, USART, etc.)
-│   ├── stm32f10x_conf.h            # STM32 configuration header
-│   ├── stm32f10x_it.c / it.h       # Interrupt service routines
-│   ├── system_stm32f10x.c          # System clock configuration
-│   ├── startup_stm32f10x.ld        # Linker script
-│   ├── tiny_printf.c               # Minimal printf implementation
-│   └── ...
+│   ├── capture.c
+│   ├── capture.h
+│   ├── frame.c
+│   ├── frame.h
+│   ├── main.c
+│   ├── main.h
+│   ├── parameters.h
+│   ├── peripheral.c
+│   ├── peripheral.h
+│   ├── stm32f10x_conf.h
+│   ├── stm32f10x_it.c
+│   ├── stm32f10x_it.h
+│   ├── system_stm32f10x.c
+│   ├── startup_stm32f10x.ld
+│   └── tiny_printf.c
+│
 └── README.md
+```
 
-🛠️ Getting Started
-Requirements
+## ⚙️ Getting Started
+Prerequisites
+1. STM32F103C8T6 board
+2. ST-Link or equivalent debugger
+3. Qt 5.x or 6.x for PC GUI
+4. arm-none-eabi-gcc toolchain (or STM32CubeIDE)
 
-STM32F103C8T6 (Blue Pill)
+Build & Flash Firmware
+- cd src
+- make flash
 
-ST-Link / USB-TTL programmer
+Run Qt Application
+- cd Qt
+- qmake && make
+- ./oscilloscope
 
-STM32CubeIDE or arm-none-eabi-gcc toolchain
+🖥️ Usage
+- Flash STM32 firmware.
+- Connect board via UART/USB.
+- Run the Qt application.
+- Select the correct COM port.
+- View real-time waveforms.
 
-Qt 5.x/6.x for PC visualization
+🤝 Contributing
+ - Pull requests and suggestions are welcome!
 
-Build & Flash (STM32CubeIDE)
-
-Import the project into STM32CubeIDE
-
-Build the firmware
-
-Flash to the STM32 board via ST-Link
-
-Run (Qt PC Interface)
-
-Open Qt/ project in Qt Creator
-
-Build and run the application
-
-Connect the STM32 via USB/Serial
-
-📊 Usage
-
-Connect your signal to the ADC pin (PA0).
-
-Launch the Qt GUI to visualize incoming waveform.
-
-Adjust parameters (sampling rate, buffer size) in parameters.h.
+👤 Author
+ - Developed by Svansh Gaba, Anant Raj
