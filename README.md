@@ -10,7 +10,6 @@ The project captures analog signals via STM32 peripherals, transfers sampled dat
 - UART data transfer to PC  
 - **Qt application** for real-time waveform visualization  
 - Modular source code for easy extension  
-- Lightweight `tiny_printf` implementation  
 
 ---
 
